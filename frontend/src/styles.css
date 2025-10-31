@@ -1,0 +1,90 @@
+html {
+  scroll-behavior: smooth;
+}
+
+/* Snap scrolling for each section */
+body {
+  background: #f8f9fa;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+/* Each section fills the screen and is a snap point */
+section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Containers centered vertically */
+section > .container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+/* Map, charts, etc. */
+#map {
+  height: 420px;
+}
+.chart {
+  height: 260px;
+}
+
+/* Back-to-top button */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease;
+}
+.back-to-top:hover {
+  opacity: 0.85;
+}
+
+/* ===== Scroll reveal animations ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms ease,
+    transform 700ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: var(--delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.from-left {
+  transform: translateX(-28px);
+}
+.reveal.from-right {
+  transform: translateX(28px);
+}
+.reveal.from-bottom {
+  transform: translateY(28px);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
